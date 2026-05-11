@@ -28,6 +28,10 @@ from .auth import current_user_id, mint_device
 from .db import SleepSession, get_session, init_db
 from .logging_config import RequestIdMiddleware, configure_logging
 
+# Configure logging at module import so uvicorn's own startup lines
+# ("Started server process", "Waiting for application startup") are JSON too.
+configure_logging()
+
 
 # ─── Models ───────────────────────────────────────────────────────────────────
 
@@ -82,7 +86,6 @@ class DeviceRegisterResponse(BaseModel):
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
-    configure_logging()
     init_db()
     logging.getLogger("sleepwise").info("startup_complete")
     yield
