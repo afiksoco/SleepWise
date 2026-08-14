@@ -283,6 +283,23 @@ def simplify_labels(labels: np.ndarray, scheme: str = 'binary') -> np.ndarray:
         simplified[simplified == 'N2'] = 'Light'
         simplified[simplified == 'R'] = 'Light'
         simplified[simplified == 'N3'] = 'Deep'
+    elif scheme == '4class':
+        # Wake / Light (N1+N2) / Deep (N3) / REM — the Android/Samsung-style
+        # 4-stage view for the after-sleep report. Alarm decision still collapses
+        # this to binary (Deep vs not-Deep) downstream.
+        simplified[simplified == 'W'] = 'Wake'
+        simplified[simplified == 'N1'] = 'Light'
+        simplified[simplified == 'N2'] = 'Light'
+        simplified[simplified == 'N3'] = 'Deep'
+        simplified[simplified == 'R'] = 'REM'
+    elif scheme == '3class':
+        # Wake / Light (N1+N2+REM) / Deep (N3). Drops the hard REM class by
+        # folding REM into Light (REM is wakeable and moves like light sleep).
+        simplified[simplified == 'W'] = 'Wake'
+        simplified[simplified == 'N1'] = 'Light'
+        simplified[simplified == 'N2'] = 'Light'
+        simplified[simplified == 'R'] = 'Light'
+        simplified[simplified == 'N3'] = 'Deep'
 
     return simplified
 
