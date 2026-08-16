@@ -1,0 +1,52 @@
+SleepWise Sleep Stage Classification Model
+==================================================
+
+Classes: ['Deep', 'Light']
+Number of features: 46
+Feature columns:
+  - hr_mean
+  - hr_std
+  - hr_min
+  - hr_max
+  - hr_range
+  - hr_cv
+  - hr_median
+  - hr_iqr
+  - hr_skew
+  - hrv_sdnn
+  - hrv_rmssd
+  - hrv_pnn50
+  - hrv_pnn20
+  - hrv_mean_ibi
+  - hrv_cv
+  - hrv_median_ibi
+  - hrv_iqr
+  - temp_mean
+  - temp_std
+  - temp_trend
+  - hr_mean_lag1
+  - hr_mean_lag2
+  - hr_mean_lag3
+  - hr_mean_lag4
+  - hr_mean_rolling_mean
+  - hr_mean_rolling_std
+  - hr_mean_trend
+  - hr_mean_roc
+  - temp_mean_lag1
+  - temp_mean_lag2
+  - temp_mean_lag3
+  - temp_mean_lag4
+  - temp_mean_rolling_mean
+  - temp_mean_rolling_std
+  - temp_mean_trend
+  - temp_mean_roc
+  - hrv_rmssd_lag1
+  - hrv_rmssd_lag2
+  - hrv_rmssd_lag3
+  - hrv_rmssd_lag4
+  - hrv_rmssd_rolling_mean
+  - hrv_rmssd_rolling_std
+  - hrv_rmssd_trend
+  - hrv_rmssd_roc
+  - hr_stability
+  - sleep_cycle_position

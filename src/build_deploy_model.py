@@ -112,7 +112,12 @@ def main():
     df = load()
     X, y, g, coh = prep(df)
     print(f"deploy features: {len(FEATS)}  (masks: has_temp, has_hrv)")
-    print(f"n={len(y)} Deep={y.mean()*100:.1f}% (walch={y[coh=='walch'].mean()*100:.1f}% dreamt={y[coh=='dreamt'].mean()*100:.1f}%)")
+    cohorts = sorted(set(coh))
+    print(f"cohorts loaded: {cohorts}  ({len(y)} epochs)")
+    for c in cohorts:
+        cm = coh == c
+        print(f"  {c:<10} n={cm.sum():>6}  Deep={y[cm].mean()*100:.1f}%")
+    print(f"n={len(y)} Deep={y.mean()*100:.1f}%")
 
     seed = np.random.RandomState(42)
     oof = np.zeros(len(y)); oof_m1 = np.zeros(len(y))    # oof_m1 = masks forced to 1 (deployment condition)
@@ -156,7 +161,7 @@ def main():
                'input_shape': [1, len(FEATS)], 'output_shape': [1, 2], 'deep_index': 1,
                'operating_threshold': thr, 'label_scheme': 'binary_n3',
                'missing_fill': 'standardize-then-zero; presence via has_temp/has_hrv',
-               'trained_on': 'Walch + DREAMT; REAL temp + time-domain HRV; masks + modality dropout'},
+               'trained_on': 'Walch + DREAMT + Wearanize+ (3 cohorts); REAL temp + time-domain HRV; masks + modality dropout'},
               open(OUT + '/tflite_metadata.json', 'w'), indent=2)
     print(f"\nEXPORTED {OUT}/  ({len(FEATS)} features, thr={thr:.3f})")
     print("feature order:", FEATS)

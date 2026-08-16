@@ -153,8 +153,8 @@
     2
   ],
   "deep_index": 1,
-  "operating_threshold": 0.4866507351398468,
+  "operating_threshold": 0.4934140145778656,
   "label_scheme": "binary_n3",
   "missing_fill": "standardize-then-zero; presence via has_temp/has_hrv",
-  "trained_on": "Walch + DREAMT; REAL temp + time-domain HRV; masks + modality dropout"
+  "trained_on": "Walch + DREAMT + Wearanize+ (3 cohorts); REAL temp + time-domain HRV; masks + modality dropout"
 }
